@@ -1,54 +1,106 @@
 
-import flet as ft
-from flet import View, Page, AppBar, ElevatedButton, Text
-from flet import RouteChangeEvent, ViewPopEvent, CrossAxisAlignment, MainAxisAlignment
+from flet import *
 
-def main(page: Page) -> None:
-    page.title = "Split"
+def main(page: Page):
+    BG = '#041955'
+    FWG = '#97b4ff'
+    FG ='#3450a1'
+    PINK = '#eb06ff'
 
-    def route_change(e: RouteChangeEvent) -> None:
-        page.views.clear()
+    friends_card = Row(
+        scroll = 'auto'
+    )
 
-        # home
-        page.views.append(
-            View(
-                route='/',
-                controls=[
-                    AppBar(title=Text('Home'), bgcolor='purple'),
-                    Text(value='Home',size=80),
-                    ElevatedButton(text="Split Bill", on_click=lambda _: page.go('/split'))
-                ],
-                vertical_alignment=MainAxisAlignment.CENTER,
-                horizontal_alignment=CrossAxisAlignment.Center,
-                spacing=26
+    friends = ['Sally', 'Fred', 'Ethan', 'Dos', 'Johnny']
+    for friends in enumerate(friends):
+        friends_card.controls.append(
+            Container(
+                border_radius=20,
+                bgcolor = BG,
+                width =170,
+                height = 110,
+                padding = 15,
+                content = Column(
+                    controls=[
+                        Text(friends),
+                            Container(
+                            border_radius=20,
+                            bgcolor = FG,
+                            width =85,
+                            height = 55,
+                            padding = 15,
+                            content = Container(
+                                Text(value = 'Pay Now')
+                             )
+                        )
+                    ]
+                )
+
             )
         )
 
-        if page.route == '/split':
-             page.views.append(
-                View(
-                    route='/split',
-                    controls=[
-                        AppBar(title=Text('Split'), bgcolor='purple'),
-                        Text(value='Split',size=80),
-                        ElevatedButton(text="Go Back Home", on_click=lambda _: page.go('/home'))
-                    ],
-                    vertical_alignment=MainAxisAlignment.CENTER,
-                    horizontal_alignment=CrossAxisAlignment.Center,
-                    spacing=26
+    first_page_contents = Container(
+        content = Column(
+            controls = [
+                Row(alignment = 'spaceBetween',
+                    controls = [
+                        Container(
+                            content = Icon(icons.MENU)),
+                            Row(
+                                controls = [
+                                    Icon(icons.SEARCH),
+                                    Icon(icons.NOTIFICATIONS_OUTLINED)
+                                ]
+                        )
+                    ]
+                ),
+                Container(height=20),
+                Text(
+                  value = 'What\'s up, Dos!'
+                ),
+                Text(
+                  value = 'FRIENDS'
+                ),
+                Container(
+                    padding = padding.only(top=10,bottom=20,),
+                    content = friends_card
+                )
+            ],
+        ),
+    )
+    page_1 = Container()
+    page_2 = Row(
+        controls = [
+            Container(
+                width = 400,
+                height = 850,
+                bgcolor =FG,
+                border_radius = 35,
+                padding = padding.only(
+                    top=50,left=20,
+                    right=20,bottom=5
+                ),
+                content = Column(
+                    controls= [
+                        first_page_contents
+                    ]
                 )
             )
-        page.update()
+        ]
+    )
 
+    container = Container(
+        width = 500,
+        height = 500,
+        bgcolor = BG,
+        border_radius = 35,
+        content = Stack (
+            controls = [
+                page_1,
+                page_2
+            ]
+        )
+    )
+    page.add(container)
 
-    def view_pop(e: ViewPopEvent) -> None:
-        page.views.pop()
-        top_view: View = page.views[-1]
-        page.go(top_view.route)
-
-    page.on_route_change = route_change
-    page.on_view_pop = view_pop
-    page.go(page.route)
-
-    if __name__ == '__main__':
-        ft.app(target=main)
+app(target=main)
