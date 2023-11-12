@@ -1,4 +1,3 @@
-
 from flet import *
 
 def main(page: Page):
@@ -12,26 +11,30 @@ def main(page: Page):
     )
 
     friends = ['Sally', 'Fred', 'Ethan', 'Dos', 'Johnny']
-    for friends in enumerate(friends):
+    for index, value in enumerate(friends):
         friends_card.controls.append(
             Container(
                 border_radius=20,
                 bgcolor = BG,
-                width =170,
+                width =150,
                 height = 110,
                 padding = 15,
                 content = Column(
                     controls=[
-                        Text(friends),
-                            Container(
-                            border_radius=20,
-                            bgcolor = FG,
-                            width =85,
-                            height = 55,
-                            padding = 15,
-                            content = Container(
-                                Text(value = 'Pay Now')
-                             )
+                        Row(alignment = 'center', controls= [Text(value)]),
+                        Row(alignment = 'center',
+                            controls = [
+                                Container(
+                                border_radius=20,
+                                bgcolor = FG,
+                                width =85,
+                                height = 45,
+                                padding = 15,
+                                content = Container(
+                                    Row(alignment = 'center', controls= [Text(value = 'Pay Now')])
+                                    )
+                                )
+                            ]
                         )
                     ]
                 )
@@ -56,6 +59,8 @@ def main(page: Page):
                 ),
                 Container(height=20),
                 Text(
+                  size = 25,
+                  weight = FontWeight.BOLD,
                   value = 'What\'s up, Dos!'
                 ),
                 Text(
