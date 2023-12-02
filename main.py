@@ -1,7 +1,8 @@
+
 from flet import *
 import array as arr
 
-#searchbar classes
+#Sterlings searchbar classes
 class Navigation(UserControl):
 
     def __init__(self, t, func):
@@ -27,7 +28,7 @@ class Navigation(UserControl):
 
 class FriendCard(UserControl):
     name = "noName"
-    BG = '#041955'
+    BG = '#00D632'
     FWG = '#97b4ff'
     FG = '#3450a1'
     PINK = '#eb06ff'
@@ -181,7 +182,7 @@ class userCard(UserControl):
 
 
 def main(page: Page):
-    BG = '#041955'
+    BG = '#00D632'
     FWG = '#97b4ff'
     FG = '#3450a1'
     PINK = '#eb06ff'
@@ -285,8 +286,22 @@ def main(page: Page):
 
     def close_dlg_settings(e):
         dlg_modal_settings.open = False
+        dlg_modal_profile.open = False
+        textfield_dialog.open = False
+
         page.update()
 
+    
+
+    def open_textfield(e):
+        page.dialog = textfield_dialog
+        textfield_dialog.open = True
+        page.update()
+    
+    def close_textfield(e):
+        textfield_dialog.open = False
+        page.update()
+    
     # Create an AlertDialog with the TextField
     textfield_dialog = AlertDialog(
         modal=True,
@@ -299,29 +314,45 @@ def main(page: Page):
         on_dismiss=lambda e: print("Modal dismissed"),
     )
 
-    def open_textfield(e):
-        page.dialog = textfield_dialog
-        textfield_dialog.open = True
-        page.update()
 
 
+    
 
     dlg_modal_settings = AlertDialog(
         modal=True,
-        title=Text("Choose payment method"),
+        title=Text("              Choose payment method"),
         actions=[
-            TextButton("Cashapp", icon="attach_money", on_click=open_textfield),
-            TextButton("PayPal", icon="paypal", on_click=open_textfield),
-            TextButton("Venmo", icon="v", on_click=open_textfield),
-            ElevatedButton("CANCEL", bgcolor="red", on_click=close_dlg_settings),
+            ElevatedButton("Cashapp", bgcolor = BG, color=WHITE, icon_color = WHITE, icon="attach_money", on_click=open_textfield),
+            ElevatedButton("PayPal", bgcolor = '#00457C', color=WHITE, icon_color = WHITE, icon="paypal", on_click=open_textfield),
+            ElevatedButton("Venmo", bgcolor = '#008CFF', color=WHITE, icon_color = WHITE, icon="v", on_click=open_textfield),
+            ElevatedButton("CANCEL", bgcolor="red", color=WHITE, icon_color = WHITE, on_click=close_dlg_settings),
         ],
         actions_alignment=MainAxisAlignment.END,
         on_dismiss=lambda e: print("Modal dismissed"),
     )
 
+    dlg_modal_profile = AlertDialog (
+        modal = True,
+        title = Text("Edit Profile"),
+        actions = [
+            ElevatedButton("Edit Name", bgcolor = WHITE, color=BG, icon_color = BG, icon="drive_file_rename_outlined", on_click=open_textfield),
+            ElevatedButton("Edit Picture", bgcolor = WHITE, color=BG, icon_color=BG, icon="picture_as_pdf_outlined", on_click=open_textfield),
+            ElevatedButton("CANCEL", bgcolor="red", color=WHITE, icon_color = WHITE, on_click=close_dlg_settings),
+
+        ],
+        actions_alignment=MainAxisAlignment.END,
+        on_dismiss=lambda e: print("Modal dismissed"),
+
+    )
+
     def open_dlg_modal_settings(e):
         page.dialog = dlg_modal_settings
         dlg_modal_settings.open = True
+        page.update()
+    
+    def open_dlg_modal_profile(e):
+        page.dialog = dlg_modal_profile
+        dlg_modal_profile.open = True
         page.update()
 
 
@@ -346,10 +377,11 @@ def main(page: Page):
 
     lv = ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
 
-
+    ##home page
     first_page_contents = Container(
         content=Column(
             controls=[
+
                 Row(alignment='top',
                     controls=[
                         Text("People you owe")
@@ -373,7 +405,7 @@ def main(page: Page):
         ),
     )
 
-
+    ##split bill page
     second_page_contents = Container(
         content=Column(
             controls=[
@@ -462,30 +494,91 @@ def main(page: Page):
             ]
         )
     )
-
-    third_page_contents = Container(
-        content=Column(
-            controls=[
-                Container(
-                    content=Text('Settings', size=20, weight=FontWeight.BOLD),
-                    bgcolor='green',
-                    padding=padding.all(10),
-                ),
-
-                Container(
-                    content=ElevatedButton(
-                        text='Add new Payment',
-                        on_click=open_dlg_modal_settings,
-                        bgcolor='green',
-                        width=200
-                    ),
-
-                    margin=margin.only(top=20),
-                ),
-
-                ]
-        )
+    ##setting page
+    circle = Stack(
+        controls = [
+            
+        ]
     )
+    third_page_contents = Container(
+        width = 400, 
+        height = 850,
+        bgcolor= BG, 
+        border_radius = 20,
+        padding = padding.only(left = 10, top = 60, right = 200),
+        margin = margin.only(left = -40), 
+        content = Column(
+            controls = [
+                Container(height =20), 
+                Row(
+                    controls = [
+                        Container(padding=padding.all(5),
+                          bgcolor=WHITE,
+                          width=90,height=90,
+                          border_radius=50,
+                          content=Container(bgcolor=WHITE,
+                            height=70,width=70,
+                            border_radius=40,
+                            content=CircleAvatar(opacity=0.9,
+                            foreground_image_url="https://bloximages.newyork1.vip.townnews.com/nola.com/content/tncms/assets/v3/editorial/4/69/469f1c32-6f4b-5c5d-b24f-f567206d6a2d/60c3ec1d12eeb.image.jpg?resize=362%2C500"
+                            )
+                          )
+                        )
+                    ]
+                ),
+                Row(
+                    controls = [
+                        Icon(icons.PERSON, color = WHITE), 
+                        Text('Dos Acker',size=30,weight='bold', color = WHITE), 
+
+
+                    ]
+                ),
+                Row( alignment= 'right', 
+                    controls = [
+                        Text('______________________________________________________________', color = WHITE)
+                    ]
+                ),
+                Row(
+                    controls = [
+                        Icon(icons.ATTACH_MONEY, color = WHITE),
+                        Container(
+                            content=ElevatedButton(
+                                text='Add new Payment',
+                                color = BG,
+                                on_click=open_dlg_modal_settings,
+                                bgcolor=WHITE,
+                                width=200
+                            ),
+
+                    ),
+                    ]
+                ),
+                Row(
+                    controls = [
+                        Icon(icons.EDIT_OUTLINED, color = WHITE),
+                        Container(
+                            content=ElevatedButton(
+                                text='Edit profile',
+                                color = BG,
+                                on_click=open_dlg_modal_profile,
+                                bgcolor=WHITE,
+                                width=200
+                            ),
+
+                    ),
+                
+                    ]
+                )
+                
+
+            ]
+        )
+        
+
+    )
+    
+    
 
     tab_1 = Container(
         visible=True,
