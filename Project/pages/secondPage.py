@@ -1,14 +1,20 @@
 import flet as ft
-
+BG = '#00D632'
+WHITE = '#FFFFFF'
 class SecondPage(ft.UserControl):
  def build(self):
 
       return ft.Container(
+        width = 400, 
+        height = 850,
+        bgcolor= BG, 
+        border_radius = 20,
+        padding = ft.padding.only(left = 10, top = 60, right = 200),
         content=ft.Column(
             controls=[
                 ft.Container(
-                    content=ft.Text('Add Bill', size=20, weight=ft.FontWeight.BOLD),
-                    bgcolor='green',
+                    content=ft.Text('Add Bill', size=20, weight=ft.FontWeight.BOLD, color = WHITE),
+                    bgcolor=BG, 
                     padding=ft.padding.all(10),
                 ),
 
@@ -17,7 +23,7 @@ class SecondPage(ft.UserControl):
                         label="Add Title for Bill",
                         hint_text="Add Title here",
                         width=380,
-                        border_color="green",
+                        border_color=WHITE,
                     ),
                     margin=ft.margin.only(top=10),
                 ),
@@ -27,7 +33,7 @@ class SecondPage(ft.UserControl):
                         label="Amount",
                         hint_text="Add Amount here",
                         width=380,
-                        border_color="green",
+                        border_color=WHITE,
                     ),
                     margin=ft.margin.only(top=10),
                 ),
@@ -37,7 +43,7 @@ class SecondPage(ft.UserControl):
                         label="Bill or Expense",
                         hint_text="click for options",
                         width=380,
-                        border_color="green",
+                        border_color=WHITE,
                         options=[
                             ft.dropdown.Option("Bill"),
                             ft.dropdown.Option("Expense"),
@@ -51,7 +57,7 @@ class SecondPage(ft.UserControl):
                         label="Select Group",
                         hint_text="click for options",
                         width=380,
-                        border_color="green",
+                        border_color=WHITE,
                         options=[
                             ft.dropdown.Option("Group 1"),
                             ft.dropdown.Option("Group 2"),
@@ -66,7 +72,7 @@ class SecondPage(ft.UserControl):
                         label="Split Actions",
                         hint_text="click for options",
                         width=380,
-                        border_color="green",
+                        border_color=WHITE,
                         options=[
                             ft.dropdown.Option("Split equally"),
                             ft.dropdown.Option("Custom"),
@@ -80,7 +86,7 @@ class SecondPage(ft.UserControl):
                     content=ft.ElevatedButton(
                         text='Save',
                        # on_click=open_dlg_modal_bill,
-                        bgcolor='green',
+                        bgcolor=WHITE,
                         width=100
                     ),
 
