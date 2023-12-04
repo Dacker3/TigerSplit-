@@ -5,7 +5,7 @@ from pages.secondPage import SecondPage;
 from pages.firstPage import FirstPage;
 from navigation import Navigation;
 BG = '#00D632'
-WHITE = '#FFFFFF'
+WHITE = '#DDEEDF'
 
 
 
@@ -15,7 +15,7 @@ WHITE = '#FFFFFF'
 def main(page: ft.Page):
       
      firstPage = FirstPage(page)
-     secondPage = SecondPage()
+     secondPage = SecondPage(page)
      thirdPage = ThirdPage(page)
      
      secondPage.visible = False

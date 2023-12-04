@@ -1,92 +1,155 @@
 import flet as ft
 BG = '#00D632'
-WHITE = '#FFFFFF'
+WHITE = '#DDEEDF'
 class SecondPage(ft.UserControl):
- def build(self):
-
-      return ft.Container(
-        width = 400, 
-        height = 850,
-        bgcolor= BG, 
-        border_radius = 20,
-        padding = ft.padding.only(left = 10, top = 60, right = 200),
-        content=ft.Column(
-            controls=[
-                ft.Container(
-                    content=ft.Text('Add Bill', size=20, weight=ft.FontWeight.BOLD, color = WHITE),
-                    bgcolor=BG, 
-                    padding=ft.padding.all(10),
-                ),
-
-                ft.Container(
-                    content=ft.TextField(
-                        label="Add Title for Bill",
-                        hint_text="Add Title here",
+    
+    def close_dlg(self, e):
+        self.dlg.open = False
+        self.page.update()
+    
+    def  __init__(self, page):
+        super().__init__()
+        self.page = page
+        self.tf1 = ft.TextField(
+                        # label="Add Title for Bill",
+                        hint_text="Add Title for Bill",
                         width=380,
-                        border_color=WHITE,
-                    ),
-                    margin=ft.margin.only(top=10),
-                ),
-
-                ft.Container(
-                    content=ft.TextField(
-                        label="Amount",
-                        hint_text="Add Amount here",
+                        color = BG, 
+                        border_color=BG,
+                        border="none"
+                    )
+        self.tf2 = ft.TextField(
+                        # label="Amount",
+                        hint_text="Add Bill Amount here",
                         width=380,
-                        border_color=WHITE,
-                    ),
-                    margin=ft.margin.only(top=10),
-                ),
-
-                ft.Container(
-                    content=ft.Dropdown(
-                        label="Bill or Expense",
-                        hint_text="click for options",
+                        border_color=BG,
+                        color = BG, 
+                        border="none"
+                    )
+        self.bill_option = ft.Dropdown(
+                        # label="Bill or Expense",
+                        hint_text="Bill or Expense",
                         width=380,
-                        border_color=WHITE,
+                        border_color='transparent',
+                        color = BG, 
                         options=[
                             ft.dropdown.Option("Bill"),
                             ft.dropdown.Option("Expense"),
                         ],
-                    ),
-                    margin=ft.margin.only(top=10),
-                ),
-
-                ft.Container(
-                    content=ft.Dropdown(
-                        label="Select Group",
-                        hint_text="click for options",
+        )
+        self.group = ft.Dropdown(
+                        # label="Select Group",
+                        hint_text="Select Group",
                         width=380,
-                        border_color=WHITE,
+                        border_color='transparent',
+                        color = BG,
                         options=[
                             ft.dropdown.Option("Group 1"),
                             ft.dropdown.Option("Group 2"),
                             ft.dropdown.Option("Group 3"),
                         ],
-                    ),
-                    margin=ft.margin.only(top=10),
-                ),
-
-                ft.Container(
-                    content=ft.Dropdown(
-                        label="Split Actions",
-                        hint_text="click for options",
+                    )
+        self.split_action = ft.Dropdown(
+                        # label="Split Actions",
+                        hint_text="Split Actions",
                         width=380,
-                        border_color=WHITE,
+                        border_color='transparent',
+                        color = BG, 
+
                         options=[
                             ft.dropdown.Option("Split equally"),
                             ft.dropdown.Option("Custom"),
                             ft.dropdown.Option("According to item"),
                         ],
-                    ),
+                    )
+        self.dlg = ft.AlertDialog(
+            title=ft.Text("Your Bill", size=30,weight='bold', color = BG), 
+            content = ft.Column(
+                controls= [ 
+                     ft.Row(
+                         controls=[
+                             ft.Text("Bill Name:",weight='bold'), self.tf1, 
+                         ]
+                     ),
+                     ft.Row(
+                         controls=[
+                             ft.Text("Bill Amount:",weight='bold'), self.tf2, 
+                         ]
+                     ),
+                     ft.Row(
+                         controls=[
+                             ft.Text("Bill or Expense:",weight='bold'), self.bill_option, 
+                         ]
+                     ),
+                     ft.Row(
+                         controls=[
+                             ft.Text("Selected Group:",weight='bold'), self.group 
+                         ]
+                     ),
+                     ft.Row(
+                         controls=[
+                             ft.Text("Split Option:",weight='bold'), self.split_action, 
+                         ]
+                     )
+                ]
+            ),
+            on_dismiss=lambda e: print("Dialog dismissed!")
+            )
+   
+    def open_dlg(self,e):
+        self.page.dialog = self.dlg
+        self.page.dialog.open = True
+        self.page.update()
+    
+
+ 
+    def build(self):
+      
+      
+      return ft.Container(
+        width = 400, 
+        height = 850,
+        bgcolor= WHITE, 
+        border_radius = 20,
+        padding = ft.padding.only(left = 10, top = 60, right = 200),
+        content=ft.Column(
+            controls=[
+                ft.Container(
+                    content=ft.Text('Add Bill', size=20, weight=ft.FontWeight.BOLD, color = BG),
+                    # padding=ft.padding.all(10),
+                ),
+
+                ft.Container(
+                    content= self.tf1, 
+                    margin=ft.margin.only(top=10),
+                ),
+
+                ft.Container(
+                    content=self.tf2, 
+                    margin=ft.margin.only(top=10),
+                ),
+
+                ft.Container(
+                    content= self.bill_option, 
+                    margin=ft.margin.only(top=10),
+                ),
+
+                ft.Container(
+                    content= self.group,
+                    margin=ft.margin.only(top=10),
+                ),
+
+                ft.Container(
+                    content= self.split_action, 
                     margin=ft.margin.only(top=10),
                 ),
 
                 ft.Container(
                     content=ft.ElevatedButton(
                         text='Save',
-                       # on_click=open_dlg_modal_bill,
-                        bgcolor=WHITE,
+                        color = WHITE, 
+                        on_click=self.open_dlg,
+                        bgcolor=BG,
                         width=100
                     ),
 

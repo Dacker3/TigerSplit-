@@ -1,6 +1,6 @@
 import flet as ft
 BG = '#00D632'
-WHITE = '#FFFFFF'
+WHITE = '#DDEEDF'
 class ThirdPage(ft.UserControl):
   def  __init__(self,page):
    super().__init__()
@@ -67,7 +67,7 @@ class ThirdPage(ft.UserControl):
       return ft.Container(
         width = 400, 
         height = 850,
-        bgcolor= BG, 
+        bgcolor= WHITE, 
         border_radius = 20,
         padding = ft.padding.only(left = 10, top = 60, right = 200),
         content = ft.Column(
@@ -76,10 +76,10 @@ class ThirdPage(ft.UserControl):
                 ft.Row(
                     controls = [
                         ft.Container(padding=ft.padding.all(5),
-                          bgcolor=WHITE,
+                          bgcolor=BG,
                           width=90,height=90,
                           border_radius=50,
-                          content=ft.Container(bgcolor=WHITE,
+                          content=ft.Container(bgcolor=BG,
                             height=70,width=70,
                             border_radius=40,
                             content=ft.CircleAvatar(opacity=0.9,
@@ -91,26 +91,26 @@ class ThirdPage(ft.UserControl):
                 ),
                 ft.Row(
                     controls = [
-                        ft.Icon(ft.icons.PERSON, color = WHITE), 
-                        ft.Text('Dos Acker',size=30,weight='bold', color = WHITE), 
+                        ft.Icon(ft.icons.PERSON, color = BG), 
+                        ft.Text('Dos Acker',size=30,weight='bold', color = BG), 
 
 
                     ]
                 ),
                 ft.Row( alignment= 'right', 
                     controls = [
-                        ft.Text('______________________________________________________________', color = WHITE)
+                        ft.Text('______________________________________________________________', color = BG)
                     ]
                 ),
                 ft.Row(
                     controls = [
-                        ft.Icon(ft.icons.ATTACH_MONEY, color = WHITE),
+                        ft.Icon(ft.icons.ATTACH_MONEY, color = BG),
                         ft.Container(
                             content=ft.ElevatedButton(
                                 text='Add new Payment',
-                                color = BG,
+                                color = WHITE,
                                 on_click = self.open_dlg_modal_settings,
-                                bgcolor=WHITE,
+                                bgcolor=BG,
                                 width=200
                             ),
 
@@ -119,13 +119,13 @@ class ThirdPage(ft.UserControl):
                 ),
                 ft.Row(
                     controls = [
-                        ft.Icon(ft.icons.EDIT_OUTLINED, color =WHITE),
+                        ft.Icon(ft.icons.EDIT_OUTLINED, color =BG),
                         ft.Container(
                             content=ft.ElevatedButton(
                                 text='Edit profile',
-                                color = BG,
+                                color = WHITE,
                                 on_click=self.open_dlg_modal_settings,
-                                bgcolor=WHITE,
+                                bgcolor=BG,
                                 width=200
                             ),
 
