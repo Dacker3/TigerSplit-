@@ -144,49 +144,49 @@ def main(page: Page):
 
     friends_card = Row(scroll='auto')
 
-    friends = ['Sally', 'Fred', 'Ethan', 'Dos', 'Johnny']
-    for index, value in enumerate(friends):
-        friends_card.controls.append(
-            Container(
-                border_radius=20,
-                bgcolor=FWG,
-                width=150,
-                height=110,
-                padding=15,
-                content=Column(
-                    controls=[
-                        Row(alignment='center', controls=[Text(value)]),
-                        Row(alignment='center',
-                            controls=[
-                                Container(
-                                    border_radius=20,
-                                    bgcolor=FG,
-                                    width=85,
-                                    height=45,
-                                    padding=15,
-                                    content=Column(controls =[Container(
-                                        Text("Pay"),
-                                        on_click=open_dlg_modal,
-                                    )
-                                    ])
-                                ), Container(
-                                    border_radius=20,
-                                    bgcolor=FG,
-                                    width=85,
-                                    height=45,
-                                    padding=15,
-                                    content=Column(controls =[Container(
-                                        Text("delete"),
-                                        on_click=open_dlg_modal,
-                                    )
-                                    ])
-                                )
-                            ]
-                            )
-                    ]
-                )
-            )
-        )
+    # friends = ['Sally', 'Fred', 'Ethan', 'Dos', 'Johnny']
+    # for index, value in enumerate(friends):
+    #     friends_card.controls.append(
+    #         Container(
+    #             border_radius=20,
+    #             bgcolor=FWG,
+    #             width=150,
+    #             height=110,
+    #             padding=15,
+    #             content=Column(
+    #                 controls=[
+    #                     Row(alignment='center', controls=[Text(value)]),
+    #                     Row(alignment='center',
+    #                         controls=[
+    #                             Container(
+    #                                 border_radius=20,
+    #                                 bgcolor=FG,
+    #                                 width=85,
+    #                                 height=45,
+    #                                 padding=15,
+    #                                 content=Column(controls =[Container(
+    #                                     Text("Pay"),
+    #                                     on_click=open_dlg_modal,
+    #                                 )
+    #                                 ])
+    #                             ), Container(
+    #                                 border_radius=20,
+    #                                 bgcolor=FG,
+    #                                 width=85,
+    #                                 height=45,
+    #                                 padding=15,
+    #                                 content=Column(controls =[Container(
+    #                                     Text("delete"),
+    #                                     on_click=open_dlg_modal,
+    #                                 )
+    #                                 ])
+    #                             )
+    #                         ]
+    #                         )
+    #                 ]
+    #             )
+    #         )
+    #     )
 
     first_page_contents = Container(
         content=Column(

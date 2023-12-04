@@ -70,7 +70,6 @@ class ThirdPage(ft.UserControl):
         bgcolor= BG, 
         border_radius = 20,
         padding = ft.padding.only(left = 10, top = 60, right = 200),
-        margin = ft.margin.only(left = -40), 
         content = ft.Column(
             controls = [
                 ft.Container(height =20), 
