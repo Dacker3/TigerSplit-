@@ -7,11 +7,15 @@ class SecondPage(ft.UserControl):
         self.dlg.open = False
         self.page.update()
     
+    def close_split(self, e):
+        self.split.open = False
+        self.page.update()
+    
     def  __init__(self, page):
         super().__init__()
         self.page = page
         self.tf1 = ft.TextField(
-                        # label="Add Title for Bill",
+                        label="Title of Bill",
                         hint_text="Add Title for Bill",
                         width=380,
                         color = BG, 
@@ -19,7 +23,7 @@ class SecondPage(ft.UserControl):
                         border="none"
                     )
         self.tf2 = ft.TextField(
-                        # label="Amount",
+                        label="Amount",
                         hint_text="Add Bill Amount here",
                         width=380,
                         border_color=BG,
@@ -27,7 +31,7 @@ class SecondPage(ft.UserControl):
                         border="none"
                     )
         self.bill_option = ft.Dropdown(
-                        # label="Bill or Expense",
+                        label="Bill or Expense",
                         hint_text="Bill or Expense",
                         width=380,
                         border_color='transparent',
@@ -38,7 +42,7 @@ class SecondPage(ft.UserControl):
                         ],
         )
         self.group = ft.Dropdown(
-                        # label="Select Group",
+                        label="Select Group",
                         hint_text="Select Group",
                         width=380,
                         border_color='transparent',
@@ -50,7 +54,7 @@ class SecondPage(ft.UserControl):
                         ],
                     )
         self.split_action = ft.Dropdown(
-                        # label="Split Actions",
+                        label="Split Actions",
                         hint_text="Split Actions",
                         width=380,
                         border_color='transparent',
@@ -68,36 +72,68 @@ class SecondPage(ft.UserControl):
                 controls= [ 
                      ft.Row(
                          controls=[
-                             ft.Text("Bill Name:",weight='bold'), self.tf1, 
+                            #  ft.Text("Bill Name:",weight='bold'), 
+                                self.tf1, 
                          ]
                      ),
                      ft.Row(
                          controls=[
-                             ft.Text("Bill Amount:",weight='bold'), self.tf2, 
+                            #  ft.Text("Bill Amount:",weight='bold'), 
+                             self.tf2, 
                          ]
                      ),
                      ft.Row(
                          controls=[
-                             ft.Text("Bill or Expense:",weight='bold'), self.bill_option, 
+                            #  ft.Text("Bill or Expense:",weight='bold'), 
+                             self.bill_option, 
                          ]
                      ),
                      ft.Row(
                          controls=[
-                             ft.Text("Selected Group:",weight='bold'), self.group 
+                            #  ft.Text("Selected Group:",weight='bold'), 
+                             self.group 
                          ]
                      ),
                      ft.Row(
                          controls=[
-                             ft.Text("Split Option:",weight='bold'), self.split_action, 
+                            #  ft.Text("Split Option:",weight='bold'), 
+                             self.split_action, 
                          ]
                      )
                 ]
             ),
             on_dismiss=lambda e: print("Dialog dismissed!")
             )
-   
+        self.t = ft.Text()
+        
+        def slider_changed(e):
+            self.t.value = f"Your percentage owed is: {e.control.value}"
+            self.page.update()
+        
+        self.split_slider = ft.Slider(min=0, max =100, divisions =10, label = "{value}%", thumb_color=BG, inactive_color=BG, on_change= slider_changed)                        
+
+        self.split = ft.AlertDialog(
+            title=ft.Text("Your Bill", size=30,weight='bold', color = BG), 
+            content= ft.Column(
+                controls=[
+                    ft.Row(
+                        controls=[
+                            ft.Text("Choose you percentage of the Bill"),
+                            self.split_slider,
+                            self.t
+                        ]
+                    )
+                ]
+            )
+
+        )
+    
     def open_dlg(self,e):
         self.page.dialog = self.dlg
+        self.page.dialog.open = True
+        self.page.update()
+    def open_split(self,e):
+        self.page.dialog = self.split
         self.page.dialog.open = True
         self.page.update()
     
@@ -139,9 +175,25 @@ class SecondPage(ft.UserControl):
                     margin=ft.margin.only(top=10),
                 ),
 
+                # ft.Container(
+                #     content= self.split_action, 
+                #     margin=ft.margin.only(top=10),
+                # ),
+
                 ft.Container(
-                    content= self.split_action, 
-                    margin=ft.margin.only(top=10),
+                    content = ft.Row(
+                        alignment = 'center',
+                        controls= [
+                            ft.ElevatedButton(
+                                text ='Split',
+                                on_click =self.open_split,
+                                color = WHITE,
+                                bgcolor = BG,
+                                width = 200,
+                                height = 35
+                            )
+                        ]
+                    )
                 ),
 
                 ft.Container(

@@ -14,6 +14,8 @@ WHITE = '#DDEEDF'
 
 def main(page: ft.Page):
       
+     page.window_bgcolor = WHITE 
+     
      firstPage = FirstPage(page)
      secondPage = SecondPage(page)
      thirdPage = ThirdPage(page)
@@ -30,7 +32,7 @@ def main(page: ft.Page):
         
       
      n = Navigation(changetab)  
-     c = ft.Container(content=ft.Column(controls = [firstPage,secondPage,thirdPage]))
+     c = ft.Container( content=ft.Column(controls = [firstPage,secondPage,thirdPage]))
      page.add(n)
      page.add(c)
       
