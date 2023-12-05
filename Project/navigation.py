@@ -21,12 +21,16 @@ class Navigation(ft.UserControl):
                bgcolor=BG, 
                destinations=[
                      ft.NavigationDestination(
-                         icon=ft.icons.PEOPLE,
-                         label="Friends"
+                         icon=ft.icons.HOME_FILLED,
+                         label="Home"
                          ),
                      ft.NavigationDestination(
                          icon=ft.icons.CARD_GIFTCARD, 
                          label="Split",
+                     ),
+                     ft.NavigationDestination(
+                        icon=ft.icons.PEOPLE,
+                        label="Groups",
                      ),
                      ft.NavigationDestination(
                         icon=ft.icons.SETTINGS,
